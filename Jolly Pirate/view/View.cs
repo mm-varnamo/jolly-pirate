@@ -22,5 +22,17 @@ namespace Jolly_Pirate.view
             Quit,
             None
         }
+
+        public void renderLogo()
+        {
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("X======================X");
+            Console.WriteLine("X                      X");
+            Console.WriteLine("X   The Jolly Pirate   X");
+            Console.WriteLine("X                      X");
+            Console.WriteLine("X======================X");
+            Console.ResetColor();
+        }
     }
 }
