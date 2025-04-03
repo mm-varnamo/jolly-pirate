@@ -18,7 +18,7 @@ namespace Jolly_Pirate.view
             DeleteBoat,
             ViewSimpleList,
             ViewDetailedList,
-            ViewSpecificMemeber,
+            ViewSpecificMember,
             Quit,
             None
         }
@@ -53,6 +53,26 @@ namespace Jolly_Pirate.view
             Console.WriteLine("9. View a specific members information");
             Console.WriteLine("0. Quit the program");
 
+        }
+
+        public ActionTaken GetUsersInput()
+        {
+            char usersChoice = Console.ReadKey().KeyChar;
+
+            switch (usersChoice)
+            {
+                case '1': return ActionTaken.RegisterMember;
+                case '2': return ActionTaken.EditMember;
+                case '3': return ActionTaken.DeleteMember;
+                case '4': return ActionTaken.RegisterBoat;
+                case '5': return ActionTaken.EditBoat;
+                case '6': return ActionTaken.DeleteBoat;
+                case '7': return ActionTaken.ViewSimpleList;
+                case '8': return ActionTaken.ViewDetailedList;
+                case '9': return ActionTaken.ViewSpecificMember;
+                case '0': return ActionTaken.Quit;
+                default: return ActionTaken.None;
+            }
         }
     }
 }
