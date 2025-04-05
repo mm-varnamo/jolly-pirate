@@ -46,9 +46,14 @@ namespace Jolly_Pirate.model
 
         private void SetSocialSecurityNumber(string ssn)
         {
-            if (!Regex.IsMatch(ssn, @"^\d{10}$"))
+            if (!IsValidSSN(ssn))
                 throw new ArgumentException("The social security number must be 10 digits long.");
             SocialSecurityNumber = ssn;
+        }
+
+        private bool IsValidSSN(string ssn)
+        {
+            return Regex.IsMatch(ssn, @"^\d{10}$");
         }
 
         private void SetUniqueID(int id)
