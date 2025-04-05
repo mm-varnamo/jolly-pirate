@@ -19,11 +19,22 @@ namespace Jolly_Pirate.model
             SetUniqueID(uniqueID);
         }
 
-        public void UpdateMemberData(string name, string socialSecurityNumber, int uniqueID)
+        public void UpdateMemberData(string? name = null, string? socialSecurityNumber = null, int? uniqueID = null)
         {
-            SetName(name);
-            SetSocialSecurityNumber(socialSecurityNumber);
-            SetUniqueID(uniqueID);
+            if (name != null)
+            {
+                SetName(name);
+            }
+
+            if (socialSecurityNumber != null)
+            {
+                SetSocialSecurityNumber(socialSecurityNumber);
+            }
+
+            if (uniqueID.HasValue)
+            {
+                SetUniqueID(uniqueID.Value);
+            }
         }
 
         private void SetName(string name)
