@@ -8,18 +8,18 @@ namespace Jolly_Pirate.model
     {
         public string Name { get; private set; }
         public string SocialSecurityNumber { get; private set; }
-        public int UniqueID { get; private set; }
+        public Guid UniqueID { get; private set; }
 
         private readonly List<Boat> _boats = new List<Boat>();
 
-        public Member(string name, string socialSecurityNumber, int uniqueID)
+        public Member(string name, string socialSecurityNumber)
         {
             SetName(name);
             SetSocialSecurityNumber(socialSecurityNumber);
-            SetUniqueID(uniqueID);
+            UniqueID = Guid.NewGuid();
         }
 
-        public void UpdateMemberData(string? name = null, string? socialSecurityNumber = null, int? uniqueID = null)
+        public void UpdateMemberData(string? name = null, string? socialSecurityNumber = null)
         {
             if (name != null)
             {
@@ -29,11 +29,6 @@ namespace Jolly_Pirate.model
             if (socialSecurityNumber != null)
             {
                 SetSocialSecurityNumber(socialSecurityNumber);
-            }
-
-            if (uniqueID.HasValue)
-            {
-                SetUniqueID(uniqueID.Value);
             }
         }
 
@@ -54,13 +49,6 @@ namespace Jolly_Pirate.model
         private bool IsValidSSN(string ssn)
         {
             return Regex.IsMatch(ssn, @"^\d{10}$");
-        }
-
-        private void SetUniqueID(int id)
-        {
-            if (id < 0)
-                throw new ArgumentOutOfRangeException("The unique ID cannot be negative.");
-            UniqueID = id;
         }
 
         public void AddBoat(Boat boat)
