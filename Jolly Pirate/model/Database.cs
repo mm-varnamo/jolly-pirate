@@ -13,7 +13,7 @@ namespace Jolly_Pirate.model
             File.WriteAllText(_fileName, jsonString);
         }
 
-        public IEnumerable<Member> LoadMembersRegistryFromDB()
+        public List<Member> LoadMembersRegistryFromDB()
         {
             if (!File.Exists(_fileName)) return new List<Member>();
 
