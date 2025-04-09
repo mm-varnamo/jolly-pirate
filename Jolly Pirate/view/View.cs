@@ -18,8 +18,8 @@ namespace Jolly_Pirate.view
             RegisterBoat,
             EditBoat,
             DeleteBoat,
-            ViewSimpleList,
-            ViewDetailedList,
+            ViewSimpleMembersList,
+            ViewDetailedMembersList,
             ViewSpecificMember,
             None
         }
@@ -68,8 +68,8 @@ namespace Jolly_Pirate.view
                 case '4': return ActionTaken.RegisterBoat;
                 case '5': return ActionTaken.EditBoat;
                 case '6': return ActionTaken.DeleteBoat;
-                case '7': return ActionTaken.ViewSimpleList;
-                case '8': return ActionTaken.ViewDetailedList;
+                case '7': return ActionTaken.ViewSimpleMembersList;
+                case '8': return ActionTaken.ViewDetailedMembersList;
                 case '9': return ActionTaken.ViewSpecificMember;
                 case '0': return ActionTaken.Quit;
                 default: return ActionTaken.None;
