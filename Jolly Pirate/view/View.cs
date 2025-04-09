@@ -81,27 +81,25 @@ namespace Jolly_Pirate.view
             string name;
             string socialSecurityNumber;
 
-            RenderLogo();
-            Console.WriteLine("Register a new member");
-
             do
             {
-                Console.Clear();
+                RenderLogo();
                 Console.WriteLine("Register a new member");
+                Console.WriteLine();
                 Console.WriteLine("Type the members name:");
                 name = Console.ReadLine() ?? "";
             } while (name.Length == 0);
 
             do
             {
-                Console.Clear();
-                Console.WriteLine("Register a new member");
+                Console.WriteLine();
                 Console.WriteLine("Type the members social security number, follow the format yymmddxxxx: ");
                 socialSecurityNumber = Console.ReadLine() ?? "";
             } while (socialSecurityNumber.Length != 10 || !socialSecurityNumber.All(char.IsDigit));
 
             Console.ForegroundColor = ConsoleColor.Green;
             Member member = new Member(name, socialSecurityNumber);
+            Console.WriteLine();
             Console.WriteLine("The member was successfully registered.");
             Console.ResetColor();
             Console.WriteLine("Press any key to return to the main menu.");
