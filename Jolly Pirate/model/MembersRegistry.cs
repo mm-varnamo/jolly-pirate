@@ -36,7 +36,7 @@ namespace Jolly_Pirate.model
 
             return member;
         }
-        public IEnumerable<Member> GetMembersList()
+        public List<Member> GetMembersList()
         {
             return _members;
         }
