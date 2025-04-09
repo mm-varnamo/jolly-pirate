@@ -11,6 +11,7 @@ namespace Jolly_Pirate.view
     {
         public enum ActionTaken
         {
+            Quit,
             RegisterMember,
             EditMember,
             DeleteMember,
@@ -20,7 +21,6 @@ namespace Jolly_Pirate.view
             ViewSimpleList,
             ViewDetailedList,
             ViewSpecificMember,
-            Quit,
             None
         }
 
@@ -39,7 +39,7 @@ namespace Jolly_Pirate.view
         public void RenderMainMenu()
         {
             RenderLogo();
-            Console.WriteLine("1. Register a new memeber");
+            Console.WriteLine("1. Register a new member");
             Console.WriteLine("2. Edit a member");
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("3. Delete a member");
@@ -107,6 +107,22 @@ namespace Jolly_Pirate.view
             Console.WriteLine("Press any key to return to the main menu.");
             Console.ReadLine();
             return member;
+        }
+
+        public void ViewSimpleMembersList(List<Member> membersList)
+        {
+            RenderLogo();
+            Console.WriteLine();
+
+            foreach (var member in membersList)
+            {
+                Console.WriteLine($"Name: {member.Name} Social Number: {member.SocialSecurityNumber} Id: {member.UniqueID} Amount of boats: {member.GetBoatCount()}");
+            }
+
+            Console.ResetColor();
+            Console.WriteLine();
+            Console.WriteLine("Press the return key to return to the main menu.");
+            Console.ReadLine();
         }
     }
 }
