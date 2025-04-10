@@ -21,7 +21,7 @@ namespace Jolly_Pirate.model
             int deletedAmount = _members.RemoveAll(m => m.UniqueID == ID);
 
             if (deletedAmount == 0) {
-                throw new ArgumentOutOfRangeException("A member with that id does not exist!");
+                throw new ArgumentOutOfRangeException($"A member with the id {ID} does not exist!");
             }
         }
         public Member GetMemberByID(Guid ID)
@@ -31,7 +31,7 @@ namespace Jolly_Pirate.model
 
             if (member == null)
             {
-                throw new ArgumentOutOfRangeException("A member with that id does not exist!");
+                throw new ArgumentOutOfRangeException($"A member with the id {ID} does not exist!");
             }
 
             return member;
