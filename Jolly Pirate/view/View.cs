@@ -107,6 +107,52 @@ namespace Jolly_Pirate.view
             return member;
         }
 
+        public void DeleteMember(Member member)
+        {
+            Console.Clear();
+            RenderLogo();
+
+            Console.WriteLine($"{member.Name} was deleted successfully!");
+            Console.WriteLine("Press any key to continue.");
+            Console.ReadKey();
+        }
+
+        public Guid SelectUserByID(List<Member> membersList)
+        {
+            Guid membersID;
+            bool isValidID = false;
+
+            RenderLogo();
+            Console.WriteLine("Select the member's ID");
+            Console.WriteLine();
+
+            foreach(var member in membersList)
+            {
+                Console.WriteLine($"Name: {member.Name} Social Number: {member.SocialSecurityNumber} Id: {member.UniqueID}");
+            }
+
+            do
+            {
+                Console.WriteLine();
+                Console.WriteLine("Enter the members ID:");
+                string input = Console.ReadLine();
+
+                if (Guid.TryParse(input, out membersID))
+                {
+                    isValidID = true;
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Invalid ID. Please try again.");
+                    Console.ResetColor();
+                }
+            } while (!isValidID);
+
+            Console.WriteLine(membersID);
+            return membersID;
+        }
+
         public void ViewSimpleMembersList(List<Member> membersList)
         {
             RenderLogo();
@@ -119,6 +165,16 @@ namespace Jolly_Pirate.view
 
             Console.ResetColor();
             Console.WriteLine();
+            Console.WriteLine("Press the return key to return to the main menu.");
+            Console.ReadLine();
+        }
+
+        public void ShowInputError(string errorMessage)
+        {
+            Console.Clear();
+            RenderLogo();
+
+            Console.WriteLine(errorMessage);
             Console.WriteLine("Press the return key to return to the main menu.");
             Console.ReadLine();
         }
