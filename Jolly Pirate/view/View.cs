@@ -107,6 +107,39 @@ namespace Jolly_Pirate.view
             return member;
         }
 
+        public void EditMember(Member member)
+        {
+            string socialSecurityNumber;
+            string name;
+
+            RenderLogo();
+
+            do
+            {
+                Console.WriteLine();
+                Console.WriteLine($"Edit member {member.Name}'s name ");
+                Console.WriteLine("Type the new name: ");
+                name = Console.ReadLine() ?? "";
+            } while (name.Length == 0);
+
+            Console.Clear();
+            RenderLogo();
+
+            do
+            {
+                Console.WriteLine();
+                Console.WriteLine($"Edit member {member.Name}'s social security number ");
+                Console.WriteLine("Type the new social security number, follow the format yymmddxxxx:");
+                socialSecurityNumber = Console.ReadLine() ?? "";
+            } while (socialSecurityNumber.Length != 10);
+
+            member.SetName(name);
+            member.SetSocialSecurityNumber(socialSecurityNumber);
+
+            Console.WriteLine("Press any key to return to the main menu.");
+            Console.ReadLine();
+        }
+
         public void DeleteMember(Member member)
         {
             Console.Clear();
