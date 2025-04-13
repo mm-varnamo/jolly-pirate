@@ -19,7 +19,7 @@ namespace Jolly_Pirate.model
             UniqueID = Guid.NewGuid();
         }
 
-        public void UpdateMemberData(string? name = null, string? socialSecurityNumber = null)
+        public void EdítMemberData(string? name = null, string? socialSecurityNumber = null)
         {
             if (name != null)
             {
@@ -32,14 +32,14 @@ namespace Jolly_Pirate.model
             }
         }
 
-        private void SetName(string name)
+        public void SetName(string name)
         {
             if (string.IsNullOrWhiteSpace(name))
                 throw new ArgumentException("The name cannot be empty.");
             Name = name;
         }
 
-        private void SetSocialSecurityNumber(string ssn)
+        public void SetSocialSecurityNumber(string ssn)
         {
             if (!IsValidSSN(ssn))
                 throw new ArgumentException("The social security number must be 10 digits long.");
