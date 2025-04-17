@@ -8,10 +8,10 @@ namespace Jolly_Pirate.model
 {
     public enum BoatType
     {
-        Canoe,
-        BattleShip,
-        Yacht,
-        SubMarine
+        Canoe = 1,
+        BattleShip = 2,
+        Yacht = 3,
+        SubMarine = 4
     }
     public class Boat
     {
