@@ -73,12 +73,25 @@ namespace Jolly_Pirate.controller
                     }
                 }
 
+                if (usersInput == View.ActionTaken.RegisterBoat)
+                {
+                    try
+                    {
+                        Guid usersID = view.SelectUserByID(membersRegistry.GetMembersList());
+                        membersRegistry.GetMemberByID(usersID).AddBoat(view.RegisterBoat());
+                        db.SaveMembersRegistryToDB(membersRegistry.GetMembersList());
+                    } catch (ArgumentOutOfRangeException ex)
+                    {
+                        view.ShowInputError(ex.Message);
+                    }
+                }
+
                 if (usersInput == View.ActionTaken.ViewSimpleMembersList)
                 {
                     var members = membersRegistry.GetMembersList();
                     view.ViewSimpleMembersList(members);
                 }
-
+ 
                 view.RenderMainMenu();
                 usersInput = view.GetUsersInput();
             }
