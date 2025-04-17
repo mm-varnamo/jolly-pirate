@@ -150,6 +150,41 @@ namespace Jolly_Pirate.view
             Console.ReadKey();
         }
 
+        public Boat RegisterBoat()
+        {
+            int length;
+            int typeChoice;
+
+            RenderLogo();
+            Console.WriteLine("Register boat to member");
+            Console.WriteLine();
+
+            do
+            {
+                Console.WriteLine("Enter boat length:");
+            } while (!int.TryParse(Console.ReadLine(), out length));
+
+            do
+            {
+                Console.WriteLine("Enter boat type:");
+                Console.WriteLine("1.Canoe 2.Battle Ship 3.Yacht 4.Sub-Marine");
+                typeChoice = Int32.Parse(Console.ReadLine());
+            } while (typeChoice < 1 || typeChoice > 4);
+
+            BoatType type = (BoatType)typeChoice;
+
+            Boat boat = new Boat(length, type);
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("The bost was registered to the selected user.");
+            Console.ResetColor();
+            Console.WriteLine("Press any key to return to the main menu.");
+            Console.ReadLine();
+
+            return boat;
+
+        }
+
         public Guid SelectUserByID(List<Member> membersList)
         {
             Guid membersID;
@@ -159,7 +194,7 @@ namespace Jolly_Pirate.view
             Console.WriteLine("Select the member's ID");
             Console.WriteLine();
 
-            foreach(var member in membersList)
+            foreach (var member in membersList)
             {
                 Console.WriteLine($"Name: {member.Name} Social Number: {member.SocialSecurityNumber} Id: {member.UniqueID}");
             }
