@@ -8,15 +8,24 @@ namespace Jolly_Pirate.model
     {
         public string Name { get; private set; }
         public string SocialSecurityNumber { get; private set; }
-        public Guid UniqueID { get; private set; }
+        public Guid UniqueID { get; set; }
 
-        private readonly List<Boat> _boats = new List<Boat>();
+        private List<Boat> _boats = new();
+
+        public List<Boat> Boats
+        {
+            get => _boats;
+            set => _boats = value ?? new List<Boat>();
+        }
 
         public Member(string name, string socialSecurityNumber)
         {
             SetName(name);
             SetSocialSecurityNumber(socialSecurityNumber);
-            UniqueID = Guid.NewGuid();
+            if (UniqueID == Guid.Empty)
+            {
+                UniqueID = Guid.NewGuid();
+            }
         }
 
         public void EdítMemberData(string? name = null, string? socialSecurityNumber = null)
