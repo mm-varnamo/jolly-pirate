@@ -152,12 +152,42 @@ namespace Jolly_Pirate.view
 
         public Boat RegisterBoat()
         {
-            int length;
-            int typeChoice;
-
+ 
             RenderLogo();
             Console.WriteLine("Register boat to member");
             Console.WriteLine();
+
+            Boat boat = InputBoatData();
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("The bost was registered to the selected user.");
+            Console.ResetColor();
+            Console.WriteLine("Press any key to return to the main menu.");
+            Console.ReadLine();
+
+            return boat;
+        }
+
+        public Boat EditBoat()
+        {
+            RenderLogo();
+            Console.WriteLine("Edit a members boat");
+
+            Boat boat = InputBoatData();
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("The members boat was successfuly updated.");
+            Console.ResetColor();
+            Console.WriteLine("Press any key to return to the main menu.");
+            Console.ReadLine();
+
+            return boat;
+        }
+
+        private Boat InputBoatData()
+        {
+            int length;
+            int typeChoice;
 
             do
             {
@@ -169,20 +199,14 @@ namespace Jolly_Pirate.view
                 Console.WriteLine("Enter boat type:");
                 Console.WriteLine("1.Canoe 2.Battle Ship 3.Yacht 4.Sub-Marine");
                 typeChoice = Int32.Parse(Console.ReadLine());
+
             } while (typeChoice < 1 || typeChoice > 4);
 
             BoatType type = (BoatType)typeChoice;
 
             Boat boat = new Boat(length, type);
 
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("The bost was registered to the selected user.");
-            Console.ResetColor();
-            Console.WriteLine("Press any key to return to the main menu.");
-            Console.ReadLine();
-
             return boat;
-
         }
 
         public Guid SelectUserByID(List<Member> membersList)
@@ -235,6 +259,35 @@ namespace Jolly_Pirate.view
             Console.WriteLine();
             Console.WriteLine("Press the return key to return to the main menu.");
             Console.ReadLine();
+        }
+
+        public int GetIndexOfBoat(IEnumerable<Boat> boats)
+        {
+            RenderLogo();
+            int indexOfBoat = 0;
+
+            foreach (var boat in boats)
+            {
+                Console.WriteLine($"Index: {indexOfBoat} Type: {boat.Type} Length: {boat.Length}");
+                indexOfBoat++;
+            }
+
+            bool isValidIndex = false;
+            int chosenIndex;
+
+            do
+            {
+                Console.WriteLine("Enter the index of the boat you would like to edit and then press enter.");
+                chosenIndex = Int32.Parse(Console.ReadLine());
+                
+                if (chosenIndex >= 0 || chosenIndex < (boats.Count() - 1))
+                {
+                    isValidIndex = true;
+                }
+
+            } while (!isValidIndex);
+
+            return chosenIndex;
         }
 
         public void ShowInputError(string errorMessage)
