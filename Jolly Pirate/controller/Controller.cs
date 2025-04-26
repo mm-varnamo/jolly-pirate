@@ -34,7 +34,8 @@ namespace Jolly_Pirate.controller
                 {
                     try
                     {
-                        var membersID = view.SelectUserByID(membersRegistry.GetMembersList());
+                        List<Member> members = membersRegistry.GetMembersList();
+                        var membersID = view.SelectUserByID(members);
                         var memberToEdit = membersRegistry.GetMemberByID(membersID);
                         view.EditMember(memberToEdit);
 
@@ -79,6 +80,24 @@ namespace Jolly_Pirate.controller
                     {
                         Guid usersID = view.SelectUserByID(membersRegistry.GetMembersList());
                         membersRegistry.GetMemberByID(usersID).AddBoat(view.RegisterBoat());
+                        db.SaveMembersRegistryToDB(membersRegistry.GetMembersList());
+                    } catch (ArgumentOutOfRangeException ex)
+                    {
+                        view.ShowInputError(ex.Message);
+                    }
+                }
+
+                if (usersInput == View.ActionTaken.EditBoat)
+                {
+                    try
+                    {
+                        Guid usersID = view.SelectUserByID(membersRegistry.GetMembersList());
+                        int indexOfBoat = view.GetIndexOfBoat(membersRegistry.GetMemberByID(usersID).GetBoatList());
+
+                        Member member = membersRegistry.GetMemberByID(usersID);
+
+                        member.UpdateBoatValues(view.EditBoat(), indexOfBoat);
+
                         db.SaveMembersRegistryToDB(membersRegistry.GetMembersList());
                     } catch (ArgumentOutOfRangeException ex)
                     {
