@@ -184,6 +184,34 @@ namespace Jolly_Pirate.view
             return boat;
         }
 
+        public int DeleteBoat(Member member)
+        {
+            RenderLogo();
+            Console.WriteLine($"Delete {member.Name}'s boat");
+
+            int index = 0;
+
+            foreach (var boat in member.GetBoatList())
+            {
+                Console.WriteLine($"Index: {index}, Type: {boat.Type}, Length: {boat.Length}");
+                index++;
+            }
+
+            int indexOfBoat;
+
+            do
+            {
+                Console.WriteLine("Choose the index of the boat you want to remove and press return.");
+                indexOfBoat = Int32.Parse(Console.ReadLine());
+            } while (indexOfBoat < 0 && indexOfBoat > member.GetBoatList().Count - 1);
+
+            Console.WriteLine("The boat was successfully removed");
+            Console.WriteLine("Press any key to return to the main menu.");
+            Console.ReadKey();
+
+            return indexOfBoat;
+        }
+
         private Boat InputBoatData()
         {
             int length;
