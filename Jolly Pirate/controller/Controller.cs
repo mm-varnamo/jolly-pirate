@@ -105,6 +105,30 @@ namespace Jolly_Pirate.controller
                     }
                 }
 
+                if (usersInput == View.ActionTaken.DeleteBoat)
+                {
+                    try
+                    {
+                        List<Member> membersList = membersRegistry.GetMembersList();
+                        Guid membersID = view.SelectUserByID(membersList);
+                        Member member = membersRegistry.GetMemberByID(membersID);
+
+                        if (member.Boats.Count == 0)
+                        {
+
+                        }
+
+                        int indexOfBoat = view.DeleteBoat(member);
+                        member.RemoveBoat(indexOfBoat);
+
+                        db.SaveMembersRegistryToDB(membersRegistry.GetMembersList());
+                    } 
+                    catch (Exception ex) 
+                    {
+                        view.ShowInputError(ex.Message);
+                    }
+                }
+
                 if (usersInput == View.ActionTaken.ViewSimpleMembersList)
                 {
                     var members = membersRegistry.GetMembersList();
