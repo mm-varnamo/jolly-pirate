@@ -289,6 +289,47 @@ namespace Jolly_Pirate.view
             Console.ReadLine();
         }
 
+        public void ViewDetailedMembersList(List<Member> membersList)
+        {
+            RenderLogo();
+            Console.WriteLine("You are viewing a detailed list of the registered members");
+            Console.WriteLine();
+
+            foreach(var member in membersList)
+            {
+                Console.WriteLine($"Name: {member.Name} Personal Number: {member.SocialSecurityNumber} ID: {member.UniqueID}");
+                Console.WriteLine();
+                Console.WriteLine($"{member.Name}'s registered boats:");
+
+                DisplayMemberBoats(member.GetBoatList());
+
+                Console.WriteLine();
+            }
+
+            Console.WriteLine("Enter any key to return to the main menu.");
+            Console.ReadKey();
+        }
+
+        public void ViewSpecificMember(Member member)
+        {
+            RenderLogo();
+            Console.WriteLine($"Name: {member.Name} Personal Number: {member.SocialSecurityNumber} ID: {member.UniqueID}");
+
+            DisplayMemberBoats(member.GetBoatList());
+
+            Console.WriteLine();
+            Console.WriteLine("Enter any key to return to the main menu.");
+            Console.ReadKey();
+        }
+
+        public void DisplayMemberBoats(IReadOnlyList<Boat> boats)
+        {
+            foreach (var boat in boats)
+            {
+                Console.WriteLine($"Boat type: {boat.Type}, Boat length: {boat.Length}");
+            }
+        }
+
         public int GetIndexOfBoat(IEnumerable<Boat> boats)
         {
             RenderLogo();
