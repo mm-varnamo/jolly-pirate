@@ -113,11 +113,6 @@ namespace Jolly_Pirate.controller
                         Guid membersID = view.SelectUserByID(membersList);
                         Member member = membersRegistry.GetMemberByID(membersID);
 
-                        if (member.Boats.Count == 0)
-                        {
-
-                        }
-
                         int indexOfBoat = view.DeleteBoat(member);
                         member.RemoveBoat(indexOfBoat);
 
@@ -133,6 +128,21 @@ namespace Jolly_Pirate.controller
                 {
                     var members = membersRegistry.GetMembersList();
                     view.ViewSimpleMembersList(members);
+                }
+
+                if (usersInput == View.ActionTaken.ViewDetailedMembersList)
+                {
+                    List<Member> membersList = membersRegistry.GetMembersList();
+                    view.ViewDetailedMembersList(membersList);
+                }
+
+                if (usersInput == View.ActionTaken.ViewSpecificMember)
+                {
+                    List<Member> membersList = membersRegistry.GetMembersList();
+                    Guid membersID = view.SelectUserByID(membersList);
+                    Member selectedMember = membersRegistry.GetMemberByID(membersID);
+
+                    view.ViewSpecificMember(selectedMember);
                 }
  
                 view.RenderMainMenu();
